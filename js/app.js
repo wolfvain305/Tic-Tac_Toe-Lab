@@ -139,7 +139,6 @@ function switchTurn() {
 }
 
 function render() {
-    // Logic to render the game board
     updateBoard();
     updateMessage();
 }   
