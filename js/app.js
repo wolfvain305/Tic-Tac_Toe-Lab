@@ -1,7 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
 const squareEls = document.querySelectorAll('.sqr');
-const messageEl = document.getElementById('.message');
+const messageEl = document.getElementById('message');
 const resetBtnEL = document.getElementById('reset')
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -40,7 +40,6 @@ render();
 
  function updateBoard() {
         board.forEach((square, index) => {
-            squareEls[index].textContent
             if (square === 'X') {
                 squareEls[index].textContent = "X"
             } else if 
@@ -48,7 +47,7 @@ render();
             squareEls[index].textContent = "O"
             }
             else {
-                squareEls[index].style.backgroundColor = "White"
+                squareEls[index].textContent = ""
             }
 
         });
@@ -56,10 +55,11 @@ render();
 
     function updateMessage() {
         if (winner && tie === false) {
-            (turn === 'X')
+           messageEl.textContent = `Congrats to ${turn} for winning!`
+            // const messageEl = document.getElementById('.message');
         }
         if ( winner === false && tie === true) {
-            (turn = 'tie')
+            messageEl.textContent = `Op ${turn} you tied, try again!`
         }
     }
 
@@ -103,6 +103,7 @@ function handleClick(event) {
     console.log("winner:", winner)
     console.log("tie:", tie);
     console.log("turn:", turn)
+    render()
 }
 
 function placePiece(index) {
@@ -143,6 +144,17 @@ function render() {
     updateMessage();
 }   
 
+function resetForm(){
+board = ['','','',
+         '','','',
+         '','','',];
+turn = 'X';
+winner = false;
+tie = false;
+updateBoard()
+messageEl.textContent= 'Lets Try Again!';
+}
+
 window.onload = function () {
     init();
 }
@@ -152,4 +164,5 @@ window.onload = function () {
 squareEls.forEach(square => {
     square.addEventListener('click', handleClick);
 })
-resetBtnEL.addEventListener('click',init);
+
+resetBtnEL.addEventListener('click', resetForm);
